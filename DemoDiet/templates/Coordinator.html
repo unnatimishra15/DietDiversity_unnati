@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load static wagtailcore_tags wagtailimages_tags %}
+<html>
+    <head>
+<link href="{% static 'css/MyStyle.css' %}" rel="stylesheet">
+
+</head>
+<body>
+    {% block content %}
+<p class="formheading"> Coordinator Details </p>
+
+<form method="POST" class="post-form" action=".">  
+    {% csrf_token %}  
+    
+   <p>Coordinator Id {{ form.CoordinatorId }} </p>
+
+   <p>Coordinator Name {{ form.CoordinatorName }} </p>
+
+   <p>Institute {{ form.Institute }} </p>
+
+    <button type="submit" class="formButton">Save</button>  
+</form>
+
+
+{% endblock content %}
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+<form method="POST" class="post-form" action=".">  
+    {% csrf_token %}  
+    
+    {{form.as_p}}
+    {{test}}
+    <button type="submit" class="save btn btn-default">Save</button>  
+    
+</form>
+   
+
+{% endblock content %}
