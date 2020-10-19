@@ -28,7 +28,8 @@ class RecipeModel(Page):
 
 class Recipe(models.Model):
         RecipeName = models.CharField(max_length=100)
-        DishType = models.CharField(max_length=100 ,choices=recipetype,default=False)
-        CookingProcess = models.CharField(max_length=100,choices=process,default=False)
+        DishType = models.CharField(choices=recipetype,max_length=100,default='Snacks')
+        CookingProcess = models.CharField(choices=process,max_length=100,default='Shallow Fried')
         ExplainDish= models.CharField(max_length=500)
+        objects = models.Manager()
  

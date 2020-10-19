@@ -1,0 +1,38 @@
+{% load static%}
+{% load materializecss %}
+{% load wagtailcore_tags %}
+
+{% block css%}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'css/materialize.min.css' %}">
+
+{% endblock%}
+
+    {% block title%}
+
+        Student Details
+
+    {% endblock%}
+   
+    </div>
+
+    {% block content %}
+        <div style="width: 30%;  margin: 0px 0px 0px 443px;"> 
+        <form method="POST" class="post-form" action="">  
+            {% csrf_token %}  
+         {{ form | materializecss }}
+        <button type="submit" class="save btn btn-default">Save</button>  
+       
+        </form>
+        </div>
+      
+        {% endblock  %}
+        
+
+{% block script%}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'js/lightgallery-all.min.js' %}"></script>
+
+{% endblock%}
+</body>
+</html>

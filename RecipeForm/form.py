@@ -11,5 +11,5 @@ class RecipeForm(forms.ModelForm):
             'RecipeName',
             'DishType',
             'CookingProcess',
-            'ExplainDish'
+            'ExplainDish',
         ]

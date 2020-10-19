@@ -11,8 +11,8 @@ def RecipePage(request):
         form.save()
 
     context= {
-        'form' : form,
-        'test': 'test'
+        'form': form,
+        'test': 'test',
     }
 
     return render(request,'RecipeForm.html',context)

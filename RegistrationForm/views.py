@@ -1,21 +1,18 @@
 from django.shortcuts import render,redirect
 from .form import RegistrationForm
 from .models import  RegisterationFormModel
-
-
+from django.urls import reverse
+from django.contrib import messages
 # Create your views here.
 def register(request):
    
-    form = RegistrationForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-
-    context= {
-        'form' : form,
-        'test': 'test'
-    }
-
-    return render(request,'register.html',context)
-        
-
-    
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print('saved')
+            messages.add_message(request,messages.INFO,'Saved Successfully')
+            return redirect(reverse('Display:display'))
+    else:
+        form = RegistrationForm()
+    return render(request,'register.html',{'form':form})

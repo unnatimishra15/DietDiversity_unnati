@@ -1,23 +1,20 @@
 {% load static %}
-
+{% load materializecss %}
 {% load wagtailcore_tags %}
 {% block content %}
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
-<title>SignUp Form</title>
+<title>Mentor Registration Form</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- Custom Theme files -->
-<link href="{% static 'css/MyStyle.css' %}" rel="stylesheet" type="text/css" media="all" />
-<!-- //Custom Theme files -->
-<!-- web font -->
-<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
-<!-- //web font -->
+{% block css %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.min.css" integrity="sha256-qj3p6P1fJIV+Ndv7RW1ovZI2UhOuboj9GcODzcNFIN8=" crossorigin="anonymous" />
+  <link href="{% static 'css/MyStyle.css' %}" rel="stylesheet" type="text/css" media="all" />
+  <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+{% endblock css %}
+
 </head>
 <body>
 	<!-- main -->
@@ -26,29 +23,36 @@
 		<div class="main-agileinfo">
 			<div class="agileits-top">
 				<form method="POST" class="post-form" action=".">
-                  <p class = "mentorfields"> Mentor Type: {{form.MentorType}}</p>
-                  <p class = "mentorfields"> Institute :{{form.Institute}}</p>
-                  <p class = "mentorfields"> Table of Registered Students: </p>
-
-					
-					
-					<input type="submit" value="Save">
+					{% csrf_token %}  
+					{{ form | materializecss:'custom_size=m6' }}
+				   <button type="submit" class="save btn btn-default">Save</button>
 				</form>
 				
 			</div>
 		</div>
-		<!-- copyright -->
-		
-		<!-- //copyright -->
-	
+			
 	</div>
 	<!-- //main -->
-</body>
-</html>
-
-
-
-
-
-
 {% endblock content %}
+{% block javascript %}
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js" integrity="sha256-SrBfGi+Zp2LhAvy9M1bWOCXztRU9Ztztxmu5BcYPcPE=" crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function(){
+
+  // Initialize materialize data picker
+  $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
+  $('select').formSelect();
+
+});
+</script>
+{% endblock javascript %}
+</body>
+
+</html>

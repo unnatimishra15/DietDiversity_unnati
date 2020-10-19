@@ -1,16 +1,75 @@
-{% extends 'base.html'%}
+{% load static%}
+{% load materializecss %}
 {% load wagtailcore_tags %}
 
-{% block content %}
+{% block css%}
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
+<link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.min.css" integrity="sha256-qj3p6P1fJIV+Ndv7RW1ovZI2UhOuboj9GcODzcNFIN8=" crossorigin="anonymous" />
+{% endblock%}
 
-<form method="POST" class="post-form" action=".">  
-    {% csrf_token %}  
+    {% block title%}
+
+        Student Details
+
+    {% endblock%}
+
+    {% block content %}
+      {% if messages %}
+        {% for message in messages %}
+          {% if 'info' in message.tags %}
+            <div class=" card-panel green lighten-2">{{message}}</div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+        <div style="width: 30%;  margin: 0px 0px 0px 443px;"> 
+        <form method="POST" class="post-form" action="">  
+            {% csrf_token %}  
+         {{ form }}
+        <button type="submit" class="save btn btn-default">Save</button>  
+        </form>
+        </div>
+        <a class="heightlink tooltipped" id =  "height" data-position="right" >Height </a>  
+        <a class="weightlink tooltipped" id  = "weight" data-position="right">Weight </a>
+        <a  class="waistlink tooltipped" id  = "waist" data-position="right">Waist </a> 
+        
+        
+    {% endblock  %}
+        
+
+    {% block javascript %}
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
     
-    {{form.as_p}}
-    {{test}}
-    <button type="submit" class="save btn btn-default">Save</button>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js" integrity="sha256-SrBfGi+Zp2LhAvy9M1bWOCXztRU9Ztztxmu5BcYPcPE=" crossorigin="anonymous"></script>
     
-</form>
+    <script>
+    $(document).ready(function(){
+    
+      // Initialize materialize data picker
+      $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
+      $('select').formSelect();
+    
+    });
    
+   
+      // Or with jQuery
+    $('#height').tooltip({
+      html: "<img src='/static/images/height.jpeg' height = 200 weight = 200 '>"
+    });
+    $('#weight').tooltip({
+      html: "<img src='/static/images/weight.jpeg' height = 200 weight = 200 '>"
+    });
+    $('#waist').tooltip({
+      html: "<img src='/static/images/waist.jpeg' height = 200 weight = 200 '>"
+    });
+    </script>
 
-{% endblock content %}
+    
+    {% endblock javascript %}
+    
+
+

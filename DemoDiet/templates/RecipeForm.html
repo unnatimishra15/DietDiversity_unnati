@@ -1,104 +1,50 @@
 {% load static %}
-
 {% load wagtailcore_tags %}
+{% load materializecss %}
 {% block content %}
-
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Colorlib Templates">
-   
-    <!-- Title Page-->
-    <title> Recipe Form</title>
-
-    <!-- Icons font CSS -->
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/material-design-iconic-font.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
-   
-    <!-- Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/daterangepicker.css' %}">
-    
-    <!-- Main CSS-->
-     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<title>Recipie Details</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+{% block css %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.min.css" integrity="sha256-qj3p6P1fJIV+Ndv7RW1ovZI2UhOuboj9GcODzcNFIN8=" crossorigin="anonymous" />
+{% endblock css %}
 </head>
-
 <body>
-    <div class="page-wrapper bg-red p-t-180 p-b-100 font-robo">
-        <div class="wrapper wrapper--w960">
-            <div class="card card-2">
-                <div class="card-heading"></div>
-                <div class="card-body">
-                    <h2 class="title">Recipe Details</h2>
-                    <form method="POST" class="post-form" action=".">
-                        <div class="input-group">
-                           <p  class="input--style-2">Recipe Name:{{form.RecipeName}}</p> 
-                            
-                        </div>
-                     
-                            <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <p  class="input--style-2 "><p class="input--style-2"> Cooking Process : {{form.CookingProcess}} </p>
-                                    
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                  <p class="input--style-2" >Dish Type:{{form.DishType}}</p> 
-                                  
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group">
-                           
-                           <p  class="input--style-2">Recipe Details:{{form.ExplainDish}}</p> 
-                                               
-                             
-                         </div>
-                       
-                        <div class="p-t-30">
-                            <button class="btn btn--radius btn--green" type="submit">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+
+   <div style="width: 30%;  margin: 0px 0px 0px 443px;"> 
+        <form method="POST" class="post-form" action=".">  
+            {% csrf_token %}  
+         {{ form | materializecss:'custom_size=m6' }}
+        <button type="submit" class="save btn btn-default">Save</button>  
+        </form>
     </div>
+{% endblock content%}
+{% block javascript %}
 
+<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 
-   
-    <!-- Jquery JS-->
-    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js" integrity="sha256-SrBfGi+Zp2LhAvy9M1bWOCXztRU9Ztztxmu5BcYPcPE=" crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function(){
+
+  // Initialize materialize data picker
+  $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
+  $('select').formSelect();
+
+});
+</script>
+
     
-    <!-- Vendor JS-->
-    
-    <script type="text/javascript" src="{% static 'js/select2.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/moment.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/daterangepicker.js' %}"></script>
-   
-
-    <!-- Main JS-->
-    <script type="text/javascript" src="{% static 'js/global.js' %}"></script>
-    
-
+{% endblock javascript %}
 </body>
-
 </html>
-<!-- end document-->
-
-
-
-
-
-
-
-
-
-{% endblock content %}

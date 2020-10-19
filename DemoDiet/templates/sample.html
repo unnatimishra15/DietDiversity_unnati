@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Select From</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Back</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{% url 'multipleforms' %}">Welcome {{user.username}}</a></li>
+      <li><a href='recipeform/recipe/'>Recipe</a></li>
+      <li><a href='foodform/food/'>Food</a></li>
+      <li><a href="dietrecall/">DietRecall</a></li>
+      <li><a href="{% url 'register' %}">Student Details</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- <div class="container">
+  <h3>Inverted Navbar</h3>
+  <p>An inverted navbar is black instead of gray.</p>
+</div> -->
+
+</body>
+</html>

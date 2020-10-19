@@ -1,0 +1,106 @@
+{% load static%}
+{% load wagtailcore_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="{% static 'js/exif.js' %}"></script>
+    <title>EXIF</title>
+    
+</head>
+    <body>  
+        <img src="/home/unnati/Diet/DemoDiet/DemoDiet/static/images/animesh_test_exif.jpg" id="the-img" style="max-width: 200px;"><br>
+        <p id="pic-info"></p>
+        <p id="map-link"></p>
+
+      
+    <script>
+        
+        
+        document.getElementById("the-img").onclick = function() {
+
+            EXIF.getData(this, function() {
+
+                myData = this;
+
+                console.log(myData.exifdata);
+
+                document.getElementById('pic-info').innerHTML = 'This photo was taken on ' + myData.exifdata.DateTime + ' with a ' + myData.exifdata.Make + ' ' + myData.exifdata.Model;
+                
+                // Calculate latitude decimal
+                var latDegree = myData.exifdata.GPSLatitude[0].numerator;
+                var latMinute = myData.exifdata.GPSLatitude[1].numerator;
+                var latSecond = myData.exifdata.GPSLatitude[2].numerator;
+                var latDirection = myData.exifdata.GPSLatitudeRef;
+                
+                var latFinal = ConvertDMSToDD(latDegree, latMinute, latSecond, latDirection);
+                console.log(latFinal);
+
+                // Calculate longitude decimal
+                var lonDegree = myData.exifdata.GPSLongitude[0].numerator;
+                var lonMinute = myData.exifdata.GPSLongitude[1].numerator;
+                var lonSecond = myData.exifdata.GPSLongitude[2].numerator;
+                var lonDirection = myData.exifdata.GPSLongitudeRef;
+
+                var lonFinal = ConvertDMSToDD(lonDegree, lonMinute, lonSecond, lonDirection);
+                console.log(lonFinal);
+                myData.GPSDestLatitudeRef = 'N'
+                myData.GPSDestLongitudeRef = 'E'
+                console.log(myData.GPSMapDatum);
+                console.log(myData.GPSProcessingMethod);
+                console.log(myData.GPSDestLongitudeRef);
+                console.log(myData.GPSDestLatitudeRef);
+
+                document.getElementById('map-link').innerHTML = '<a href="http://www.google.com/maps/place/'+lonFinal+','+latFinal+'" target="_blank">Google Maps</a>';
+            });
+        }
+
+
+
+        function ConvertDMSToDD(degrees, minutes, seconds, direction) {
+            
+            var dd = degrees + (minutes/60) + (seconds/3600);
+            
+            if (direction == "S" || direction == "W") {
+                dd = dd * -1; 
+            }
+            
+            return dd;
+        }
+
+        //window.onload=getExif;
+
+//function getExif() {
+ //   var img1 = document.getElementById("img1");
+   // EXIF.getData(img1, function() {
+     //   var make = EXIF.getTag(this, "Make");
+       // var model = EXIF.getTag(this, "Model");
+        //var makeAndModel = document.getElementById("makeAndModel");
+        //makeAndModel.innerHTML = `${make} ${model}`;
+    //});
+
+  //  var img2 = document.getElementById("img2");
+   // EXIF.getData(img2, function() {
+     //   var allMetaData = EXIF.getAllTags(this);
+       // var allMetaDataSpan = document.getElementById("allMetaDataSpan");
+        //allMetaDataSpan.innerHTML = JSON.stringify(allMetaData, null, "\t");
+    //});
+//}
+async function getExif() {
+        let output = await exifr.parse(imgBuffer)
+        console.log('latitude', output.latitude) // converted by the library
+        console.log('longitude', output.longitude) // converted by the library
+        console.log('GPSLatitude', output.GPSLatitude) // raw value
+        console.log('GPSLongitude', output.GPSLongitude) // raw value
+        console.log('GPSDateStamp', output.GPSDateStamp)
+        console.log('DateTimeOriginal', output.DateTimeOriginal)
+        console.log('DateTimeDigitized', output.DateTimeDigitized)
+        console.log('ModifyDate', output.ModifyDate)
+    } 
+
+    </script>
+</body>
+</html>

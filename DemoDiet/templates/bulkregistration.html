@@ -1,0 +1,21 @@
+
+{% if messages %}
+    {% for message in messages %}
+        <div>
+        {{message | safe}}
+        </div>
+    {% endfor %}
+{% else %}
+        
+    <!-- {{Order}} -->
+    <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}  
+        <input type="file" name="file">
+        <p>Only accepts CSV files </p>
+        
+        <button type="submit">Upload</button>
+       
+
+    </form>
+    
+{% endif %}    

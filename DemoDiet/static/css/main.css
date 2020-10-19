@@ -472,8 +472,7 @@ input {
 }
 
 .card-2 .card-heading {
-  background: url("../images/bg-heading-02.jpg") top left/cover no-repeat;
-  width: 29.1%;
+  background: url("") top left/cover no-repeat;
   display: table-cell;
 }
 

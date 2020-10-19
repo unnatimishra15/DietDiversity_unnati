@@ -1,0 +1,84 @@
+{% load static %}
+{% load materializecss %}
+{% load wagtailcore_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Display Data</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    {% block css%}
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.min.css" integrity="sha256-qj3p6P1fJIV+Ndv7RW1ovZI2UhOuboj9GcODzcNFIN8=" crossorigin="anonymous" />
+        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+{% endblock%}
+  </head>
+  {% block content%}
+<body>
+    <div>
+    <table class="striped">
+        <tr><th>Name</th><th>Age</th><th>Student Class</th><th>Gender</th><th>Height</th><th>Weight</th>
+            <th>Waist</th><th>Hip</th></tr>
+            {{labels}}
+            {{hip}}
+            {{obj}}
+{% for info in data%}
+    <tr>
+    <td>{{info.Name}} </td>
+    <td>{{info.Age}} </td>
+    <td>{{info.StudentClass}}</td>
+    <td>{{info.Gender}} </td>
+    <td>{{info.Height}} </td>
+    <td>{{info.Weight}}</td>
+    <td>{{info.Waist}}</td>
+    <td>{{info.Hip}}</td>
+    </tr>
+    {% endfor%}
+</table>
+</div>
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+
+<script>
+    
+     //console.log("{{labels|safe}}")
+     //console.log("{{hip|safe}}")
+     //var l = JSON.parse("{{obj.object.Name|safe}}")
+     //var h = JSON.parse("{{obj.object.Hip|safe}}")
+    //var l = "{{labels|safe}}".split(',')
+    //var h = "{{hip|safe}}".split(',')
+    //console.log(l)
+    //console.log(h)
+   console.log("{{labels | safe}}")
+   console.log("{{hip | safe}}")
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{labels | safe}},
+            datasets: [{
+                label: "hip",
+                data: {{hip| safe}},
+                backgroundColor: 'green' ,
+                borderColor: 'black',
+                borderWidth: 0.5
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+    
+
+    {% endblock%}
+</body>
+</html>

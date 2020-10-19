@@ -9,7 +9,9 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+from django.conf.global_settings import DATETIME_INPUT_FORMATS
+# ISO 8601 datetime format to accept html5 datetime input values
+DATETIME_INPUT_FORMATS += ["%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M"]
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
@@ -36,9 +38,17 @@ INSTALLED_APPS = [
     'StudentSubmission',
     'Schoolregistration',
     'FormBuilder',
-    'ExampleCss',
     'Day',
+    'Display',
+    'CameraApp',
+    'DietRecallApp',
+    'TeacherRegistration',
+    'UsersRegistration',
     'multiselectfield',
+    'materializecssform',
+    'MapImage',
+    'datetimepicker',
+    'LoginApp',
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.embeds',
@@ -50,7 +60,7 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail.core',
-
+    'crispy_forms',
     'modelcluster',
     'taggit',
 
@@ -103,14 +113,15 @@ WSGI_APPLICATION = 'DemoDiet.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-         'NAME': 'DietDiversity',
-        'USER' : 'unnati',
-        'PASSWORD' : 'unnati15',
+         'NAME': 'TestDatabase',
+        'USER' : 'postgres',
+        'PASSWORD' : 'postgres',
         'HOST': 'localhost',
          'PORT':'5432'
     }
 }
 
+AUTH_USER_MODEL = 'UsersRegistration.UserType'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

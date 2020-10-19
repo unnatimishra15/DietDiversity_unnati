@@ -12,9 +12,9 @@ class RegistrationForm(forms.ModelForm):
             'Age',
             'Gender',
             'StudentClass',
-            'SpendingDay',
             'Height',
             'Weight',
             'Waist' ,     
             'Hip',
+          
         ]
